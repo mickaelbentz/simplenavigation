@@ -5,12 +5,16 @@ This is a simple web-based navigation app that shows the direction to a destinat
 ## Features
 - **Modern and Intuitive Design**: Clean, responsive interface with smooth animations.
 - **Input destination address via text**: Easy-to-use input field with placeholder examples.
-- **Autocomplete suggestions for addresses**: Real-time suggestions as you type.
+- **Autocomplete suggestions for addresses**: 
+  - Real-time suggestions as you type.
+  - Click on a suggestion to automatically fill the address field.
+  - Suggestions appear after typing at least 3 characters.
 - **Beautiful Compass**: 
   - Clear North, South, East, and West indicators.
   - Elegant directional arrow pointing to your destination.
   - Center circle for better orientation.
 - **Distance Display**: Shows the remaining distance to your destination.
+- **Walking Time Estimate**: Displays the estimated walking time based on a average walking speed of 5 km/h.
 - **Paste from Clipboard**: Quickly paste addresses with a single click.
 - **Clear Status Messages**: Informative messages for loading, success, and error states.
 - **Responsive Design**: Works seamlessly on both mobile and desktop devices.

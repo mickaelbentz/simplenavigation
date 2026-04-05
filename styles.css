@@ -52,6 +52,36 @@ h1 {
     margin: 10px 0;
 }
 
+.autocomplete-results {
+    position: absolute;
+    width: calc(100% - 40px);
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    margin-top: -15px;
+    padding: 10px 0;
+}
+
+.autocomplete-results.show {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--dark-color);
+    transition: background-color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+    background-color: var(--light-color);
+}
+
 #addressInput {
     flex: 1;
     padding: 12px 15px;
@@ -118,6 +148,14 @@ h1 {
     font-size: 18px;
     font-weight: 500;
     color: var(--secondary-color);
+    margin: 5px 0;
+}
+
+#walkingTime {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--dark-color);
+    margin: 5px 0;
 }
 
 .status-message {

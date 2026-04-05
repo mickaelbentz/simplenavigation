@@ -180,10 +180,20 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        ctx.fillText('N', centerX, centerY - radius - 30);
-        ctx.fillText('E', centerX + radius + 30, centerY);
-        ctx.fillText('S', centerX, centerY + radius + 40);
-        ctx.fillText('W', centerX - radius - 30, centerY);
+        // Calculate positions for N, E, S, W
+        const nX = centerX;
+        const nY = centerY - radius - 30;
+        const eX = centerX + radius + 30;
+        const eY = centerY;
+        const sX = centerX;
+        const sY = centerY + radius + 40;
+        const wX = centerX - radius - 30;
+        const wY = centerY;
+
+        ctx.fillText('N', nX, nY);
+        ctx.fillText('E', eX, eY);
+        ctx.fillText('S', sX, sY);
+        ctx.fillText('W', wX, wY);
 
         // Draw a nice arrow
         const arrowLength = radius - 10;
@@ -223,7 +233,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Get the status message element
     const statusMessage = document.getElementById('statusMessage');
+    const walkingTimeElement = document.getElementById('walkingTime');
     let isLoading = false;
+    const WALKING_SPEED_KM_PER_HOUR = 5; // Average walking speed in km/h
 
     // Event listener for the paste button
     const pasteButton = document.getElementById('pasteButton');
@@ -250,18 +262,50 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Get the autocomplete results container
+    const autocompleteResults = document.getElementById('autocompleteResults');
+
     // Add autocomplete functionality
     let autocompleteTimeout;
     addressInput.addEventListener('input', function() {
         clearTimeout(autocompleteTimeout);
         autocompleteTimeout = setTimeout(function() {
             const query = addressInput.value;
-            getAddressSuggestions(query, function(suggestions) {
-                // For simplicity, we'll just log the suggestions to the console
-                // In a real app, you would display these in a dropdown menu
-                console.log('Suggestions:', suggestions);
-            });
+            if (query.length >= 3) {
+                getAddressSuggestions(query, function(suggestions) {
+                    showAutocompleteResults(suggestions);
+                });
+            } else {
+                autocompleteResults.classList.remove('show');
+            }
         }, 300);
+    });
+
+    // Function to show autocomplete results
+    function showAutocompleteResults(suggestions) {
+        autocompleteResults.innerHTML = '';
+        if (suggestions.length > 0) {
+            suggestions.forEach(suggestion => {
+                const div = document.createElement('div');
+                div.className = 'autocomplete-item';
+                div.textContent = suggestion;
+                div.addEventListener('click', function() {
+                    addressInput.value = suggestion;
+                    autocompleteResults.classList.remove('show');
+                });
+                autocompleteResults.appendChild(div);
+            });
+            autocompleteResults.classList.add('show');
+        } else {
+            autocompleteResults.classList.remove('show');
+        }
+    }
+
+    // Hide autocomplete results when clicking outside
+    document.addEventListener('click', function(event) {
+        if (event.target !== addressInput) {
+            autocompleteResults.classList.remove('show');
+        }
     });
 
     // Get the stop updates button
@@ -300,6 +344,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     drawCompass(bearing);
                     distanceElement.textContent = `Distance: ${distance.toFixed(2)} km`;
+                    
+                    // Calculate walking time
+                    const walkingTimeHours = distance / WALKING_SPEED_KM_PER_HOUR;
+                    const walkingTimeMinutes = Math.round(walkingTimeHours * 60);
+                    walkingTimeElement.textContent = `Walking Time: ~${walkingTimeMinutes} minutes (${WALKING_SPEED_KM_PER_HOUR} km/h)`;
+                    
                     statusMessage.textContent = '✅ Direction calculated successfully! Live updates started.';
                     statusMessage.className = 'status-message success';
                     stopUpdatesButton.style.display = 'inline-block';
