@@ -1,0 +1,162 @@
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #166088;
+    --accent-color: #4fc3f7;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --warning-color: #ffc107;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--dark-color);
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+h1 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.input-group {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.controls {
+    margin: 10px 0;
+}
+
+#addressInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+#addressInput:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.button {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+#pasteButton {
+    background-color: #e0e0e0;
+    color: var(--dark-color);
+}
+
+#pasteButton:hover {
+    background-color: #d0d0d0;
+}
+
+#getDirectionButton {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    flex: 1;
+}
+
+#getDirectionButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.compass-container {
+    margin: 30px 0;
+    position: relative;
+}
+
+#compass {
+    border: 3px solid var(--secondary-color);
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.distance-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: var(--light-color);
+    border-radius: 8px;
+}
+
+#distance {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.status-message {
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 15px;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.status-message.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border-left: 5px solid var(--success-color);
+    display: block;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #842029;
+    border-left: 5px solid var(--error-color);
+    display: block;
+}
+
+.status-message {
+    background-color: #fff3cd;
+    color: #664d03;
+    border-left: 5px solid var(--warning-color);
+    display: block;
+}

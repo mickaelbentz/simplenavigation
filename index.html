@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Navigation Web App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Navigation</h1>
+        <div class="input-group">
+            <input type="text" id="addressInput" placeholder="Ex: 123 Rue de Paris, 75000 Paris">
+            <button id="pasteButton" class="button">📋</button>
+            <button id="getDirectionButton" class="button">Get Direction</button>
+        </div>
+        <div class="controls">
+            <button id="stopUpdatesButton" class="button" style="display: none; background-color: var(--error-color); color: white;">Stop Live Updates</button>
+        </div>
+        <div id="statusMessage" class="status-message"></div>
+        <div class="compass-container">
+            <canvas id="compass" width="200" height="200"></canvas>
+        </div>
+        <div class="distance-container">
+            <p id="distance">Distance: --</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
